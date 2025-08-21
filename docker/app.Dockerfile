@@ -43,8 +43,7 @@ ENV NEXT_TELEMETRY_DISABLED=1 \
     DOCKER_BUILD=1
 
 WORKDIR /app
-# Use next build without turbopack to avoid Bun compatibility issues
-RUN cd apps/sim && next build
+RUN bun run build
 
 # ========================================
 # Runner Stage: Run the actual app
