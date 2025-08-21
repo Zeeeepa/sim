@@ -1,7 +1,7 @@
 # ========================================
 # Base Stage: Alpine Linux with Bun
 # ========================================
-FROM oven/bun:canary-alpine AS base
+FROM oven/bun:alpine AS base
 
 # ========================================
 # Dependencies Stage: Install Dependencies
@@ -43,7 +43,8 @@ ENV NEXT_TELEMETRY_DISABLED=1 \
     DOCKER_BUILD=1
 
 WORKDIR /app
-RUN bun run build
+# Use next build without turbopack to avoid Bun compatibility issues
+RUN cd apps/sim && next build
 
 # ========================================
 # Runner Stage: Run the actual app
